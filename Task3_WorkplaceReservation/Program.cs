@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Task3_WorkplaceReservation.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ReservationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 
 var app = builder.Build();
 
