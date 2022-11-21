@@ -12,13 +12,13 @@ namespace Task3_WorkplaceReservation.Controllers
         {
             _reservationService = reservationService;
         }
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View(_reservationService.GetReservations());
         }
 
         [HttpGet]
-        public ActionResult Create() {
+        public IActionResult Create() {
             return View();
         }
     }

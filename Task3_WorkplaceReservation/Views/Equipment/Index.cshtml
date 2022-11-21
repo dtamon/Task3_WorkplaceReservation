@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Task3_WorkplaceReservation.Models.EmployeeViewModel>
+﻿@model IEnumerable<Task3_WorkplaceReservation.Models.EquipmentViewModel>
 
 @{
-    ViewData["Title"] = "Employee List";
+    ViewData["Title"] = "Equipment List";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -13,10 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>Actions</th>
         </tr>
@@ -25,10 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

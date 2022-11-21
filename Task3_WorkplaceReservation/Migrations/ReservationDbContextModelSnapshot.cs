@@ -40,7 +40,7 @@ namespace Task3WorkplaceReservation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Task3_WorkplaceReservation.Domain.Equipment", b =>
@@ -57,7 +57,7 @@ namespace Task3WorkplaceReservation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Equipment");
+                    b.ToTable("Equipment", (string)null);
                 });
 
             modelBuilder.Entity("Task3_WorkplaceReservation.Domain.EquipmentForWorkplace", b =>
@@ -83,7 +83,7 @@ namespace Task3WorkplaceReservation.Migrations
 
                     b.HasIndex("WorkplaceId");
 
-                    b.ToTable("EqupmentForWorkplace");
+                    b.ToTable("EqupmentForWorkplace", (string)null);
                 });
 
             modelBuilder.Entity("Task3_WorkplaceReservation.Domain.Reservation", b =>
@@ -112,7 +112,7 @@ namespace Task3WorkplaceReservation.Migrations
 
                     b.HasIndex("WorkplaceId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("Task3_WorkplaceReservation.Domain.Workplace", b =>
@@ -134,7 +134,7 @@ namespace Task3WorkplaceReservation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Workplaces");
+                    b.ToTable("Workplaces", (string)null);
                 });
 
             modelBuilder.Entity("Task3_WorkplaceReservation.Domain.EquipmentForWorkplace", b =>
