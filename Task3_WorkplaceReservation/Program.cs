@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Task3_WorkplaceReservation.Domain;
+using Task3_WorkplaceReservation.Repositories.EmployeeRepository;
+using Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepository;
+using Task3_WorkplaceReservation.Repositories.EquipmentRepository;
+using Task3_WorkplaceReservation.Repositories.ReservationRepository;
+using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
+using Task3_WorkplaceReservation.Services.EmployeeService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ReservationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEquipmentForWorkplaceRepository, EquipmentForWorkplaceRepository>();
+builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IWorkplaceRepository, WorkplaceRepository>();
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 
@@ -27,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Employee}/{action=Index}/{id?}");
 
 app.Run();

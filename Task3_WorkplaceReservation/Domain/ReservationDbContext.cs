@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Task3_WorkplaceReservation.Models;
 
 namespace Task3_WorkplaceReservation.Domain
 {
@@ -11,5 +12,6 @@ namespace Task3_WorkplaceReservation.Domain
         public DbSet<Workplace> Workplaces { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<EquipmentForWorkplace> EqupmentForWorkplace { get; set; }
+        public DbSet<Task3_WorkplaceReservation.Models.EmployeeViewModel> EmployeeViewModel { get; set; }
     }
 }
