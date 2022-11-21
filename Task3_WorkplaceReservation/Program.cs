@@ -6,6 +6,7 @@ using Task3_WorkplaceReservation.Repositories.EquipmentRepository;
 using Task3_WorkplaceReservation.Repositories.ReservationRepository;
 using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Services.EmployeeService;
+using Task3_WorkplaceReservation.Services.ReservationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IWorkplaceRepository, WorkplaceRepository>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 var app = builder.Build();
 
@@ -41,6 +43,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Employee}/{action=Index}/{id?}");
+    pattern: "{controller=Reservation}/{action=Index}/{id?}");
 
 app.Run();
