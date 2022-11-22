@@ -8,6 +8,7 @@ using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Services.EmployeeService;
 using Task3_WorkplaceReservation.Services.EquipmentService;
 using Task3_WorkplaceReservation.Services.ReservationService;
+using Task3_WorkplaceReservation.Services.WorkplaceService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IWorkplaceRepository, WorkplaceRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 
 var app = builder.Build();
 

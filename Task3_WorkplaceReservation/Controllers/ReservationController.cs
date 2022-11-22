@@ -1,17 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Task3_WorkplaceReservation.Models;
+using Task3_WorkplaceReservation.Services.EmployeeService;
 using Task3_WorkplaceReservation.Services.ReservationService;
+using Task3_WorkplaceReservation.Services.WorkplaceService;
 
 namespace Task3_WorkplaceReservation.Controllers
 {
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
+        private readonly IEmployeeService _employeeService;
+        private readonly IWorkplaceService _workplaceService;
 
-        public ReservationController(IReservationService reservationService)
+        public ReservationController(IReservationService reservationService, IEmployeeService employeeService, IWorkplaceService workplaceService)
         {
             _reservationService = reservationService;
+            _employeeService = employeeService;
+            _workplaceService = workplaceService;
         }
         public IActionResult Index()
         {
@@ -20,8 +26,8 @@ namespace Task3_WorkplaceReservation.Controllers
 
         [HttpGet]
         public IActionResult Create() {
-            ViewBag.EmployeeList = new SelectList(_reservationService.GetEmployeeList(), "Id", "FirstName", "LastName");
-            ViewBag.WorkplaceList = new SelectList(_reservationService.GetWorkplaceList(), "Id", "Floor", "Room", "Table");
+            ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
             return View();
         }
 
@@ -35,8 +41,8 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.EmployeeList = new SelectList(_reservationService.GetEmployeeList(), "Id", "FirstName", "LastName");
-            ViewBag.WorkplaceList = new SelectList(_reservationService.GetWorkplaceList(), "Id", "Floor", "Room", "Table");
+            ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
             return View(_reservationService.GetReservationById(id));
         }
 

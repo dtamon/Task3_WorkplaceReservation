@@ -1,4 +1,5 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Task3_WorkplaceReservation.Domain;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Repositories.EmployeeRepository;
 using Task3_WorkplaceReservation.Repositories.ReservationRepository;
@@ -36,11 +37,6 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             _reservationRepository.DeleteReservation(reservation);
         }
 
-        public List<Employee> GetEmployeeList()
-        {
-            return _employeeRepository.GetEmployees();
-        }
-
         public ReservationViewModel GetReservationById(int id)
         {
             var reservation = _reservationRepository.GetReservationById(id);
@@ -48,9 +44,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             {
                 Id = reservation.Id,
                 Employee = reservation.Employee,
-                EmployeeId = reservation.Employee.Id,
+                EmployeeId = reservation.EmployeeId,
                 Workplace = reservation.Workplace,
-                WorkplaceId = reservation.Workplace.Id,
+                WorkplaceId = reservation.WorkplaceId,
                 TimeFrom = reservation.TimeFrom,
                 TimeTo = reservation.TimeTo
             };
@@ -66,7 +62,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
                 {
                     Id= model.Id,
                     Employee = model.Employee,
+                    EmployeeId = model.EmployeeId,
                     Workplace = model.Workplace,
+                    WorkplaceId = model.WorkplaceId,
                     TimeFrom= model.TimeFrom,
                     TimeTo= model.TimeTo
                 });
@@ -74,18 +72,13 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             return reservations;
         }
 
-        public List<Workplace> GetWorkplaceList()
-        {
-            return _workplaceRepositiory.GetWorkplaces();
-        }
-
         public void UpdateReservation(ReservationViewModel model)
         {
             var reservation = new Reservation()
             {
                 Id = model.Id,
-                Employee = _employeeRepository.GetEmployeeById(model.EmployeeId),
-                Workplace = _workplaceRepositiory.GetWorkplaceById(model.WorkplaceId),
+                EmployeeId = model.EmployeeId,
+                WorkplaceId = model.WorkplaceId,
                 TimeFrom= model.TimeFrom,
                 TimeTo= model.TimeTo
             };

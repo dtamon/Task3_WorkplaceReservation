@@ -1,12 +1,10 @@
 ﻿@model Task3_WorkplaceReservation.Models.ReservationViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Reservation";
 }
 
-<h1>Edit</h1>
-
-<h4>ReservationViewModel</h4>
+<h1>@ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,11 +13,13 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="EmployeeId" class="control-label">Employee</label>
-                <select asp-for="EmployeeId" asp-items="ViewBag.EmployeeList"></select>
+                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeList"></select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WorkplaceId" class="control-label">Workplace</label>
-                <select asp-for="WorkplaceId" asp-items="ViewBag.WorkplaceList"></select>
+                <select asp-for="WorkplaceId" class="form-control" asp-items="ViewBag.WorkplaceList"></select>
+                <span asp-validation-for="WorkplaceId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TimeFrom" class="control-label"></label>
@@ -31,13 +31,14 @@
                 <input asp-for="TimeTo" class="form-control" />
                 <span asp-validation-for="TimeTo" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

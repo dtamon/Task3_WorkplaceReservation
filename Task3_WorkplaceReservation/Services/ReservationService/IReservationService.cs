@@ -1,4 +1,5 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Task3_WorkplaceReservation.Domain;
 using Task3_WorkplaceReservation.Models;
 
 namespace Task3_WorkplaceReservation.Services.ReservationService
@@ -10,7 +11,5 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
         public void DeleteReservation(int id);
         public List<ReservationViewModel> GetReservations();
         public ReservationViewModel GetReservationById(int id);
-        public List<Employee> GetEmployeeList();
-        public List<Workplace> GetWorkplaceList();
     }
 }
