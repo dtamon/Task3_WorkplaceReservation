@@ -6,7 +6,7 @@ namespace Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepositor
     {
         public List<EquipmentForWorkplace> GetEquipmentForWorkplace();
         public void CreateEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace);
-        public EquipmentForWorkplace GetEquipmentForWorkplaceById(int id);
+        public List<EquipmentForWorkplace> GetEquipmentByWorkplaceId(int id);
         public void UpdateEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace);
         public void DeleteEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace);
     }

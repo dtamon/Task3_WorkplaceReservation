@@ -28,9 +28,9 @@ namespace Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepositor
             return context.EqupmentForWorkplace.Include(e => e.Equipment).Include(w => w.Workplace).ToList();
         }
 
-        public EquipmentForWorkplace GetEquipmentForWorkplaceById(int id)
+        public List<EquipmentForWorkplace> GetEquipmentByWorkplaceId(int id)
         {
-            return context.EqupmentForWorkplace.Include(e => e.Equipment).Include(w => w.Workplace).FirstOrDefault(x => x.Id == id);
+            return context.EqupmentForWorkplace.Include(e => e.Equipment).Include(w => w.Workplace).Where(x => x.Workplace.Id == id).ToList();
         }
 
         public void UpdateEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace)
