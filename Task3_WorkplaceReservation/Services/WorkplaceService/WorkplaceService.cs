@@ -44,6 +44,7 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
                 Floor = workplace.Floor,
                 Room = workplace.Room,
                 Table = workplace.Table,
+                FullLoc = "Floor=" + workplace.Floor + "; Room=" + workplace.Room + "; Table=" + workplace.Table,
                 EqForWorkplace = _equipmentForWorkplaceRepository.GetEquipmentByWorkplaceId(id)
             };
             return model;

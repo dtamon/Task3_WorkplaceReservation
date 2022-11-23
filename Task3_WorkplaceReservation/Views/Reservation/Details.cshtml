@@ -1,0 +1,69 @@
+﻿@model Task3_WorkplaceReservation.Models.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Workplace)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Workplace.FullLoc)
+        </dd>
+        <dt class = "col-sm-2">
+            Reserved From
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeFrom)
+        </dd>
+        <dt class = "col-sm-2">
+            Reserved To
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeTo)
+        </dd>
+    </dl>
+    <hr />
+    <h1>Equipment</h1>
+    <br />
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Equipment
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Workplace.EqForWorkplace)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(workplaceItem => item.Equipment.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(workplaceItem => item.Count)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

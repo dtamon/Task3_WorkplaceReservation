@@ -35,7 +35,8 @@ namespace Task3_WorkplaceReservation.Services.EmployeeService
             {
                 Id = emp.Id, 
                 FirstName = emp.FirstName,
-                LastName = emp.LastName
+                LastName = emp.LastName,
+                FullName = emp.FirstName + " " + emp.LastName
             };
             return model;
         }

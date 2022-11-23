@@ -54,6 +54,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpGet]
+        public IActionResult Details(int id)
+        {
+            ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+            return View(_reservationService.GetReservationById(id));
+        }
+
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             _reservationService.DeleteReservation(id);

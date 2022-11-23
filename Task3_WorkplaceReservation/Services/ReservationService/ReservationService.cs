@@ -4,6 +4,8 @@ using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Repositories.EmployeeRepository;
 using Task3_WorkplaceReservation.Repositories.ReservationRepository;
 using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
+using Task3_WorkplaceReservation.Services.EmployeeService;
+using Task3_WorkplaceReservation.Services.WorkplaceService;
 
 namespace Task3_WorkplaceReservation.Services.ReservationService
 {
@@ -12,12 +14,16 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
         private readonly IReservationRepository _reservationRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IWorkplaceRepository _workplaceRepositiory;
+        private readonly IEmployeeService _employeeService;
+        private readonly IWorkplaceService _workplaceService;
 
-        public ReservationService(IReservationRepository reservationRepository, IEmployeeRepository employeeRepository, IWorkplaceRepository workplaceRepositiory)
+        public ReservationService(IReservationRepository reservationRepository, IEmployeeRepository employeeRepository, IWorkplaceRepository workplaceRepositiory, IWorkplaceService workplaceService, IEmployeeService employeeService)
         {
             _reservationRepository = reservationRepository;
             _employeeRepository = employeeRepository;
             _workplaceRepositiory = workplaceRepositiory;
+            _workplaceService = workplaceService;
+            _employeeService = employeeService;
         }
         public void CreateReservation(ReservationViewModel model)
         {
@@ -43,9 +49,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             var model = new ReservationViewModel()
             {
                 Id = reservation.Id,
-                Employee = reservation.Employee,
+                Employee = _employeeService.GetEmployeeById(reservation.EmployeeId),
                 EmployeeId = reservation.EmployeeId,
-                Workplace = reservation.Workplace,
+                Workplace = _workplaceService.GetWorkplaceById(reservation.WorkplaceId),
                 WorkplaceId = reservation.WorkplaceId,
                 TimeFrom = reservation.TimeFrom,
                 TimeTo = reservation.TimeTo
@@ -61,9 +67,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
                 reservations.Add(new ReservationViewModel
                 {
                     Id= model.Id,
-                    Employee = model.Employee,
+                    Employee = _employeeService.GetEmployeeById(model.EmployeeId),
                     EmployeeId = model.EmployeeId,
-                    Workplace = model.Workplace,
+                    Workplace = _workplaceService.GetWorkplaceById(model.WorkplaceId),
                     WorkplaceId = model.WorkplaceId,
                     TimeFrom= model.TimeFrom,
                     TimeTo= model.TimeTo
