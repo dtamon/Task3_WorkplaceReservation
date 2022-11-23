@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Services.EquipmentService;
@@ -8,10 +11,11 @@ namespace Task3_WorkplaceReservation.Controllers
     public class EquipmentController : Controller
     {
         private readonly IEquipmentService _equipmentService;
-
-        public EquipmentController(IEquipmentService equipmentService)
+        private IValidator<EquipmentViewModel> _validator;
+        public EquipmentController(IEquipmentService equipmentService, IValidator<EquipmentViewModel> validator)
         {
             _equipmentService = equipmentService;
+            _validator = validator;
         }
 
         public IActionResult Index()
@@ -26,8 +30,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(EquipmentViewModel model)
+        public async Task<IActionResult> Create(EquipmentViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Create", model);
+            }
             _equipmentService.CreateEquipment(model);
             return RedirectToAction("Index");
         }
@@ -39,8 +49,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(EquipmentViewModel model)
+        public async Task<IActionResult> Edit(EquipmentViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Create", model);
+            }
             _equipmentService.UpdateEquipment(model);
             return RedirectToAction("Index");
         }

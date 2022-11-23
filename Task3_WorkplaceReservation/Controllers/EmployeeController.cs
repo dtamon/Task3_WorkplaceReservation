@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Services.EmployeeService;
@@ -8,10 +11,11 @@ namespace Task3_WorkplaceReservation.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
-
-        public EmployeeController(IEmployeeService employeeService)
+        private IValidator<EmployeeViewModel> _validator;
+        public EmployeeController(IEmployeeService employeeService, IValidator<EmployeeViewModel> validator)
         {
             _employeeService = employeeService;
+            _validator = validator;
         }
 
         public IActionResult Index()
@@ -26,8 +30,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(EmployeeViewModel model)
+        public async Task<IActionResult> Create(EmployeeViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if(!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Create", model);
+            }
             _employeeService.CreateEmployee(model);
             return RedirectToAction("Index");
         }
@@ -37,8 +47,14 @@ namespace Task3_WorkplaceReservation.Controllers
             return View(_employeeService.GetEmployeeById(id));
         }
         [HttpPost]
-        public IActionResult Edit(EmployeeViewModel model)
+        public async Task<IActionResult> Edit(EmployeeViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Create", model);
+            }
             _employeeService.UpdateEmployee(model);
             return RedirectToAction("Index");
         }
