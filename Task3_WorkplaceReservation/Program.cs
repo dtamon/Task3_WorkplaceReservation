@@ -37,6 +37,7 @@ builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeValidator>();
 builder.Services.AddScoped<IValidator<EquipmentViewModel>, EquipmentValidator>();
 builder.Services.AddScoped<IValidator<WorkplaceViewModel>, WorkplaceValidator>();
+builder.Services.AddScoped<IValidator<EqForWorkViewModel>, EqForWorkValidator>();
 
 
 var app = builder.Build();

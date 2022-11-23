@@ -10,9 +10,9 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
         public void DeleteWorkplace(int id);
         public List<WorkplaceViewModel> GetWorkplaces();
         public WorkplaceViewModel GetWorkplaceById(int id);
-        public EqForWorkpViewModel GetEqForWorkplaceById(int id);
-        public void AddEqForWorkplace(EqForWorkpViewModel model);
-        public void UpdateEqForWorkplace(EqForWorkpViewModel model);
+        public EqForWorkViewModel GetEqForWorkplaceById(int id);
+        public void AddEqForWorkplace(EqForWorkViewModel model);
+        public void UpdateEqForWorkplace(EqForWorkViewModel model);
         public void DeleteEqForWorkplace(int id);
     }
 }

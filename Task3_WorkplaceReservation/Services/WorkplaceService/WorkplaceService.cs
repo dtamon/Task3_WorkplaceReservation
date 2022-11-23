@@ -81,7 +81,7 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
         }
 
         //EquipmentForWorkplace crud methods
-        public void AddEqForWorkplace(EqForWorkpViewModel model)
+        public void AddEqForWorkplace(EqForWorkViewModel model)
         {
             var eqForWorkp = new EquipmentForWorkplace()
             {
@@ -91,7 +91,7 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
             };
             _equipmentForWorkplaceRepository.CreateEquipmentForWorkplace(eqForWorkp);
         }
-        public void UpdateEqForWorkplace(EqForWorkpViewModel model)
+        public void UpdateEqForWorkplace(EqForWorkViewModel model)
         {
             var eqForWorkp = new EquipmentForWorkplace()
             {
@@ -102,10 +102,10 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
             };
             _equipmentForWorkplaceRepository.UpdateEquipmentForWorkplace(eqForWorkp);
         }
-        public EqForWorkpViewModel GetEqForWorkplaceById(int id)
+        public EqForWorkViewModel GetEqForWorkplaceById(int id)
         {
             var eqForWorkp = _equipmentForWorkplaceRepository.GetEquipmentForWorkplaceById(id);
-            var model = new EqForWorkpViewModel()
+            var model = new EqForWorkViewModel()
             {
                 Id = eqForWorkp.Id,
                 Workplace = eqForWorkp.Workplace,

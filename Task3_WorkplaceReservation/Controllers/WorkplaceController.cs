@@ -9,6 +9,7 @@ using Task3_WorkplaceReservation.Domain;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Services.EquipmentService;
 using Task3_WorkplaceReservation.Services.WorkplaceService;
+using Task3_WorkplaceReservation.Validators;
 
 namespace Task3_WorkplaceReservation.Controllers
 {
@@ -16,13 +17,15 @@ namespace Task3_WorkplaceReservation.Controllers
     {
         private readonly IWorkplaceService _workplaceService;
         private readonly IEquipmentService _equipmentService;
-        private IValidator<WorkplaceViewModel> _validator;
+        private IValidator<WorkplaceViewModel> _workplaceValidator;
+        private IValidator<EqForWorkViewModel> _eqForWorkValidator;
 
-        public WorkplaceController(IWorkplaceService workplaceService, IEquipmentService equipmentService, IValidator<WorkplaceViewModel> validator)
+        public WorkplaceController(IWorkplaceService workplaceService, IEquipmentService equipmentService, IValidator<WorkplaceViewModel> validator, IValidator<EqForWorkViewModel> eqForWorkValidator)
         {
             _workplaceService = workplaceService;
             _equipmentService = equipmentService;
-            _validator = validator;
+            _workplaceValidator = validator;
+            _eqForWorkValidator = eqForWorkValidator;
         }
 
         public IActionResult Index()
@@ -39,7 +42,7 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkplaceViewModel model)
         {
-            ValidationResult result = await _validator.ValidateAsync(model);
+            ValidationResult result = await _workplaceValidator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
@@ -58,7 +61,7 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(WorkplaceViewModel model)
         {
-            ValidationResult result = await _validator.ValidateAsync(model);
+            ValidationResult result = await _workplaceValidator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
@@ -86,8 +89,16 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddEquipment(EqForWorkpViewModel model)
+        public async Task<IActionResult> AddEquipment(EqForWorkViewModel model)
         {
+            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+            ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
+            ValidationResult result = await _eqForWorkValidator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("AddEquipment", model);
+            }
             _workplaceService.AddEqForWorkplace(model);
             return RedirectToAction("Index");
         }
@@ -101,8 +112,16 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditEq(EqForWorkpViewModel model)
+        public async Task<IActionResult> EditEq(EqForWorkViewModel model)
         {
+            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+            ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
+            ValidationResult result = await _eqForWorkValidator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("EditEq", model);
+            }
             _workplaceService.UpdateEqForWorkplace(model);
             return RedirectToAction("Index");
         }
