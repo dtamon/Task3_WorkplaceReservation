@@ -29,8 +29,8 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
         {
             var reservation = new Reservation()
             {
-                Employee = _employeeRepository.GetEmployeeById(model.EmployeeId),
-                Workplace = _workplaceRepositiory.GetWorkplaceById(model.WorkplaceId),
+                Employee = _employeeRepository.GetEmployeeById((int)model.EmployeeId),
+                Workplace = _workplaceRepositiory.GetWorkplaceById((int)model.WorkplaceId),
                 TimeFrom = model.TimeFrom,
                 TimeTo= model.TimeTo
             };
@@ -49,9 +49,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             var model = new ReservationViewModel()
             {
                 Id = reservation.Id,
-                Employee = _employeeService.GetEmployeeById(reservation.EmployeeId),
+                Employee = _employeeService.GetEmployeeById((int)reservation.EmployeeId),
                 EmployeeId = reservation.EmployeeId,
-                Workplace = _workplaceService.GetWorkplaceById(reservation.WorkplaceId),
+                Workplace = _workplaceService.GetWorkplaceById((int)reservation.WorkplaceId),
                 WorkplaceId = reservation.WorkplaceId,
                 TimeFrom = reservation.TimeFrom,
                 TimeTo = reservation.TimeTo
@@ -67,9 +67,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
                 reservations.Add(new ReservationViewModel
                 {
                     Id= model.Id,
-                    Employee = _employeeService.GetEmployeeById(model.EmployeeId),
+                    Employee = _employeeService.GetEmployeeById((int)model.EmployeeId),
                     EmployeeId = model.EmployeeId,
-                    Workplace = _workplaceService.GetWorkplaceById(model.WorkplaceId),
+                    Workplace = _workplaceService.GetWorkplaceById((int)model.WorkplaceId),
                     WorkplaceId = model.WorkplaceId,
                     TimeFrom= model.TimeFrom,
                     TimeTo= model.TimeTo

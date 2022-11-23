@@ -114,8 +114,8 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> EditEq(EqForWorkViewModel model)
         {
-            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
-            ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
+            //ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+            //ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
             ValidationResult result = await _eqForWorkValidator.ValidateAsync(model);
             if (!result.IsValid)
             {
