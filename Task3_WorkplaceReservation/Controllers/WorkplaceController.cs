@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Design.Internal;
@@ -13,11 +16,13 @@ namespace Task3_WorkplaceReservation.Controllers
     {
         private readonly IWorkplaceService _workplaceService;
         private readonly IEquipmentService _equipmentService;
+        private IValidator<WorkplaceViewModel> _validator;
 
-        public WorkplaceController(IWorkplaceService workplaceService, IEquipmentService equipmentService)
+        public WorkplaceController(IWorkplaceService workplaceService, IEquipmentService equipmentService, IValidator<WorkplaceViewModel> validator)
         {
             _workplaceService = workplaceService;
             _equipmentService = equipmentService;
+            _validator = validator;
         }
 
         public IActionResult Index()
@@ -32,8 +37,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(WorkplaceViewModel model)
+        public async Task<IActionResult> Create(WorkplaceViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Create", model);
+            }
             _workplaceService.CreateWorkplace(model);
             return RedirectToAction("Index");
         }
@@ -45,8 +56,14 @@ namespace Task3_WorkplaceReservation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(WorkplaceViewModel model)
+        public async Task<IActionResult> Edit(WorkplaceViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View("Edit", model);
+            }
             _workplaceService.UpdateWorkplace(model);
             return RedirectToAction("Index");
         }

@@ -36,6 +36,7 @@ builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 //FluentValidation Validators
 builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeValidator>();
 builder.Services.AddScoped<IValidator<EquipmentViewModel>, EquipmentValidator>();
+builder.Services.AddScoped<IValidator<WorkplaceViewModel>, WorkplaceValidator>();
 
 
 var app = builder.Build();

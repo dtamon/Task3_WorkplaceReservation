@@ -53,7 +53,7 @@ namespace Task3_WorkplaceReservation.Controllers
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
-                return View("Create", model);
+                return View("Edit", model);
             }
             _employeeService.UpdateEmployee(model);
             return RedirectToAction("Index");
