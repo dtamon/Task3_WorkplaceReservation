@@ -1,4 +1,6 @@
-﻿namespace Task3_WorkplaceReservation.Models
+﻿using Task3_WorkplaceReservation.Domain;
+
+namespace Task3_WorkplaceReservation.Models
 {
     public class WorkplaceViewModel
     {
@@ -7,5 +9,7 @@
         public int Room { get; set; }
         public int Table { get; set; }
         public string FullLoc { get; set; }
+
+        public List<EquipmentForWorkplace> EqForWorkplace { get; set; }
     }
 }
