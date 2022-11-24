@@ -91,12 +91,12 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEquipment(EqForWorkViewModel model)
         {
-            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
-            ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
             ValidationResult result = await _eqForWorkValidator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+                ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
                 return View("AddEquipment", model);
             }
             _workplaceService.AddEqForWorkplace(model);
@@ -114,12 +114,12 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> EditEq(EqForWorkViewModel model)
         {
-            //ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
-            //ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
             ValidationResult result = await _eqForWorkValidator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+                ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
                 return View("EditEq", model);
             }
             _workplaceService.UpdateEqForWorkplace(model);

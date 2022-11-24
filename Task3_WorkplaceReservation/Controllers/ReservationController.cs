@@ -40,12 +40,12 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ReservationViewModel model)
         {
-            ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
-            ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
             ValidationResult result = await _validator.ValidateAsync(model);
             if (!result.IsValid)
-            {
+            {      
                 result.AddToModelState(this.ModelState);
+                ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
                 return View("Create", model);
             }
             _reservationService.CreateReservation(model);
@@ -63,13 +63,12 @@ namespace Task3_WorkplaceReservation.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ReservationViewModel model)
         {
-            //ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
-            //ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
-
             ValidationResult result = await _validator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
+                ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
                 return View("Create", model);
             }
             _reservationService.UpdateReservation(model);
