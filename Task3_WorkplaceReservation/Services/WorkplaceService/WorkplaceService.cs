@@ -2,6 +2,7 @@
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepository;
 using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
+using Task3_WorkplaceReservation.Services.EquipmentService;
 
 namespace Task3_WorkplaceReservation.Services.WorkplaceService
 {
@@ -9,14 +10,16 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
     {
         private readonly IWorkplaceRepository _workplaceRepository;
         private readonly IEquipmentForWorkplaceRepository _equipmentForWorkplaceRepository;
+        private readonly IEquipmentService _equipmentService;
 
-        public WorkplaceService(IWorkplaceRepository workplaceRepository, IEquipmentForWorkplaceRepository equipmentForWorkplaceRepository)
+        public WorkplaceService(IWorkplaceRepository workplaceRepository, IEquipmentForWorkplaceRepository equipmentForWorkplaceRepository, IEquipmentService equipmentService)
         {
             _workplaceRepository = workplaceRepository;
             _equipmentForWorkplaceRepository = equipmentForWorkplaceRepository;
+            _equipmentService = equipmentService;
         }
 
-        
+
 
         public void CreateWorkplace(WorkplaceViewModel model)
         {
@@ -108,9 +111,9 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
             var model = new EqForWorkViewModel()
             {
                 Id = eqForWorkp.Id,
-                Workplace = eqForWorkp.Workplace,
+                Workplace = GetWorkplaceById((int)eqForWorkp.WorkplaceId),
                 WorkplaceId = eqForWorkp.WorkplaceId,
-                Equipment = eqForWorkp.Equipment,
+                Equipment = _equipmentService.GetEquipmentById((int)eqForWorkp.EquipmentId),
                 EquipmentId = eqForWorkp.EquipmentId,
                 Count = eqForWorkp.Count
             };
