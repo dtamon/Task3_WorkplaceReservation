@@ -34,6 +34,7 @@
                 <input asp-for="TimeTo" class="form-control" />
                 <span asp-validation-for="TimeTo" class="text-danger"></span>
             </div>
+            <p class="text-danger">@Html.DisplayFor(model => Model.ErrorMessage)</p>
             <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

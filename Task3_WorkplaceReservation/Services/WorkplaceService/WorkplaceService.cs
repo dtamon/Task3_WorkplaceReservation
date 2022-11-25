@@ -111,9 +111,9 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
             var model = new EqForWorkViewModel()
             {
                 Id = eqForWorkp.Id,
-                Workplace = GetWorkplaceById((int)eqForWorkp.WorkplaceId),
+                Workplace = GetWorkplaceById(eqForWorkp.WorkplaceId),
                 WorkplaceId = eqForWorkp.WorkplaceId,
-                Equipment = _equipmentService.GetEquipmentById((int)eqForWorkp.EquipmentId),
+                Equipment = _equipmentService.GetEquipmentById(eqForWorkp.EquipmentId),
                 EquipmentId = eqForWorkp.EquipmentId,
                 Count = eqForWorkp.Count
             };

@@ -48,8 +48,19 @@ namespace Task3_WorkplaceReservation.Controllers
                 ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
                 return View("Create", model);
             }
-            _reservationService.CreateReservation(model);
-            return RedirectToAction("Index");
+            try
+            {
+                _reservationService.CreateReservation(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                result.AddToModelState(this.ModelState);
+                ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+                model.ErrorMessage = e.Message;
+                return View("Create", model);
+            }
         }
 
         [HttpGet]
@@ -69,10 +80,21 @@ namespace Task3_WorkplaceReservation.Controllers
                 result.AddToModelState(this.ModelState);
                 ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
                 ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
-                return View("Create", model);
+                return View("Edit", model);
             }
-            _reservationService.UpdateReservation(model);
-            return RedirectToAction("Index");
+            try
+            {
+                _reservationService.UpdateReservation(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                result.AddToModelState(this.ModelState);
+                ViewBag.EmployeeList = new SelectList(_employeeService.GetEmployees(), "Id", "FullName");
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+                model.ErrorMessage = e.Message;
+                return View("Edit", model);
+            }
         }
 
         [HttpGet]

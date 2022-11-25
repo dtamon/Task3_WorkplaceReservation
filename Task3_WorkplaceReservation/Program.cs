@@ -1,4 +1,5 @@
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Task3_WorkplaceReservation.Domain;
 using Task3_WorkplaceReservation.Models;
@@ -34,6 +35,10 @@ builder.Services.AddScoped<IEquipmentService, EquipmentService>();
 builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 
 //FluentValidation Validators
+builder.Services.AddFluentValidationAutoValidation(config =>
+{
+    config.DisableDataAnnotationsValidation = true;
+});
 builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeValidator>();
 builder.Services.AddScoped<IValidator<EquipmentViewModel>, EquipmentValidator>();
 builder.Services.AddScoped<IValidator<WorkplaceViewModel>, WorkplaceValidator>();

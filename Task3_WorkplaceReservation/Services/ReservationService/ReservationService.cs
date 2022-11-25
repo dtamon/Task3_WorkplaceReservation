@@ -27,14 +27,21 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
         }
         public void CreateReservation(ReservationViewModel model)
         {
-            var reservation = new Reservation()
+            if(_reservationRepository.IsReservationAvailable(model.Id, model.WorkplaceId, model.TimeFrom, model.TimeTo))
             {
-                Employee = _employeeRepository.GetEmployeeById((int)model.EmployeeId),
-                Workplace = _workplaceRepositiory.GetWorkplaceById((int)model.WorkplaceId),
-                TimeFrom = model.TimeFrom,
-                TimeTo= model.TimeTo
-            };
-            _reservationRepository.CreateReservation(reservation);
+                var reservation = new Reservation()
+                {
+                    Employee = _employeeRepository.GetEmployeeById(model.EmployeeId),
+                    Workplace = _workplaceRepositiory.GetWorkplaceById(model.WorkplaceId),
+                    TimeFrom = model.TimeFrom,
+                    TimeTo = model.TimeTo
+                };
+                _reservationRepository.CreateReservation(reservation);
+            }
+            else
+            {
+                throw new Exception("Dates collide with another reservation of this Workplace");
+            }
         }
 
         public void DeleteReservation(int id)
@@ -49,9 +56,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
             var model = new ReservationViewModel()
             {
                 Id = reservation.Id,
-                Employee = _employeeService.GetEmployeeById((int)reservation.EmployeeId),
+                Employee = _employeeService.GetEmployeeById(reservation.EmployeeId),
                 EmployeeId = reservation.EmployeeId,
-                Workplace = _workplaceService.GetWorkplaceById((int)reservation.WorkplaceId),
+                Workplace = _workplaceService.GetWorkplaceById(reservation.WorkplaceId),
                 WorkplaceId = reservation.WorkplaceId,
                 TimeFrom = reservation.TimeFrom,
                 TimeTo = reservation.TimeTo
@@ -67,9 +74,9 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
                 reservations.Add(new ReservationViewModel
                 {
                     Id= model.Id,
-                    Employee = _employeeService.GetEmployeeById((int)model.EmployeeId),
+                    Employee = _employeeService.GetEmployeeById(model.EmployeeId),
                     EmployeeId = model.EmployeeId,
-                    Workplace = _workplaceService.GetWorkplaceById((int)model.WorkplaceId),
+                    Workplace = _workplaceService.GetWorkplaceById(model.WorkplaceId),
                     WorkplaceId = model.WorkplaceId,
                     TimeFrom= model.TimeFrom,
                     TimeTo= model.TimeTo
@@ -80,15 +87,22 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
 
         public void UpdateReservation(ReservationViewModel model)
         {
-            var reservation = new Reservation()
+            if (_reservationRepository.IsReservationAvailable(model.Id, model.WorkplaceId, model.TimeFrom, model.TimeTo))
             {
-                Id = model.Id,
-                EmployeeId = model.EmployeeId,
-                WorkplaceId = model.WorkplaceId,
-                TimeFrom= model.TimeFrom,
-                TimeTo= model.TimeTo
-            };
-            _reservationRepository.UpdateReservation(reservation);
+                var reservation = new Reservation()
+                {
+                    Id = model.Id,
+                    EmployeeId = model.EmployeeId,
+                    WorkplaceId = model.WorkplaceId,
+                    TimeFrom = model.TimeFrom,
+                    TimeTo = model.TimeTo
+                };
+                _reservationRepository.UpdateReservation(reservation);
+            }
+            else
+            {
+                throw new Exception("Dates collide with another reservation of this Workplace");
+            }
         }
     }
 }
