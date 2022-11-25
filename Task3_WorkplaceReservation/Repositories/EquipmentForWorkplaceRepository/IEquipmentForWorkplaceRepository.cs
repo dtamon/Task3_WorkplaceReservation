@@ -10,5 +10,6 @@ namespace Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepositor
         public void UpdateEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace);
         public void DeleteEquipmentForWorkplace(EquipmentForWorkplace equipmentForWorkplace);
         public EquipmentForWorkplace GetEquipmentForWorkplaceById(int id);
+        public bool IsEqAlreadyAssigned(int workplaceId, int equipmentId);
     }
 }

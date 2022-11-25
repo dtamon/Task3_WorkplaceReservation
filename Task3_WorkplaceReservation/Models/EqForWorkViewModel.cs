@@ -10,5 +10,6 @@ namespace Task3_WorkplaceReservation.Models
         public EquipmentViewModel Equipment { get; set; }
         public int EquipmentId { get; set; }
         public int Count { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

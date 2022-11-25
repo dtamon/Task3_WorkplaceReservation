@@ -38,26 +38,15 @@ namespace Task3_WorkplaceReservation.Repositories.ReservationRepository
             context.SaveChanges();
         }
 
-        public bool IsReservationAvailable(int workplaceId, DateTime timeFrom, DateTime timeTo)
-        {
-            return !context.Reservations
-                .Where(x => x.WorkplaceId == workplaceId 
-                && (timeFrom < x.TimeFrom && x.TimeFrom < timeTo && timeTo < x.TimeTo )
-                || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeTo < timeTo)
-                || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeFrom < timeTo && timeTo < x.TimeTo)
-                || (timeFrom < x.TimeFrom && x.TimeTo < timeTo))
-                .Any();
-        }
-
         public bool IsReservationAvailable(int reservationId, int workplaceId, DateTime timeFrom, DateTime timeTo)
         {
             return !context.Reservations
                 .Where(x => x.Id != reservationId
                 && x.WorkplaceId == workplaceId
-                && (timeFrom < x.TimeFrom && x.TimeFrom < timeTo && timeTo < x.TimeTo)
+                && ((timeFrom < x.TimeFrom && x.TimeFrom < timeTo && timeTo < x.TimeTo)
                 || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeTo < timeTo)
                 || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeFrom < timeTo && timeTo < x.TimeTo)
-                || (timeFrom < x.TimeFrom && x.TimeTo < timeTo))
+                || (timeFrom < x.TimeFrom && x.TimeTo < timeTo)))
                 .Any();
         }
     }

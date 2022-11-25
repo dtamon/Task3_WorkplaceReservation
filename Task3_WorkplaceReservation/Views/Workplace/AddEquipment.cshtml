@@ -23,6 +23,7 @@
                     <option value="" hidden>--Select Equipment--</option>
                 </select>
                 <span asp-validation-for="EquipmentId" class="text-danger"></span>
+                <p class="text-danger">@Html.DisplayFor(model => Model.ErrorMessage)</p>
             </div>
             <div class="form-group">
                 <label asp-for="Count" class="control-label"></label>

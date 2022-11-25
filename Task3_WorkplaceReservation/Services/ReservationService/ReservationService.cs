@@ -27,7 +27,7 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
         }
         public void CreateReservation(ReservationViewModel model)
         {
-            if(_reservationRepository.IsReservationAvailable(model.Id, model.WorkplaceId, model.TimeFrom, model.TimeTo))
+            if (_reservationRepository.IsReservationAvailable(model.Id, model.WorkplaceId, model.TimeFrom, model.TimeTo))
             {
                 var reservation = new Reservation()
                 {

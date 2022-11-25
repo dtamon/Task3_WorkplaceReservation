@@ -9,7 +9,6 @@ namespace Task3_WorkplaceReservation.Repositories.ReservationRepository
         public Reservation GetReservationById(int id);
         public void UpdateReservation(Reservation reservation);
         public void DeleteReservation(Reservation reservation);
-        public bool IsReservationAvailable(int workplaceId, DateTime TimeFrom, DateTime TimeTo);
         public bool IsReservationAvailable(int reservationId, int workplaceId, DateTime TimeFrom, DateTime TimeTo);
 
     }

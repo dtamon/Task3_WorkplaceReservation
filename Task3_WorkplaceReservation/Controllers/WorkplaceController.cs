@@ -99,8 +99,19 @@ namespace Task3_WorkplaceReservation.Controllers
                 ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
                 return View("AddEquipment", model);
             }
-            _workplaceService.AddEqForWorkplace(model);
-            return RedirectToAction("Index");
+            try
+            {
+                _workplaceService.AddEqForWorkplace(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                result.AddToModelState(this.ModelState);
+                ViewBag.WorkplaceList = new SelectList(_workplaceService.GetWorkplaces(), "Id", "FullLoc");
+                ViewBag.EquipmentList = new SelectList(_equipmentService.GetEquipment(), "Id", "Type");
+                model.ErrorMessage = e.Message;
+                return View("AddEquipment", model);
+            }
         }
 
         [HttpGet]

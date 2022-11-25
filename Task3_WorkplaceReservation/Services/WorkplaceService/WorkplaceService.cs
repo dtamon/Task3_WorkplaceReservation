@@ -86,13 +86,20 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
         //EquipmentForWorkplace crud methods
         public void AddEqForWorkplace(EqForWorkViewModel model)
         {
-            var eqForWorkp = new EquipmentForWorkplace()
+            if (!_equipmentForWorkplaceRepository.IsEqAlreadyAssigned(model.WorkplaceId, model.EquipmentId))
             {
-                WorkplaceId = model.WorkplaceId,
-                EquipmentId = model.EquipmentId,
-                Count = model.Count
-            };
-            _equipmentForWorkplaceRepository.CreateEquipmentForWorkplace(eqForWorkp);
+                var eqForWorkp = new EquipmentForWorkplace()
+                {
+                    WorkplaceId = model.WorkplaceId,
+                    EquipmentId = model.EquipmentId,
+                    Count = model.Count
+                };
+                _equipmentForWorkplaceRepository.CreateEquipmentForWorkplace(eqForWorkp);
+            }
+            else
+            {
+                throw new Exception("This Equipment type is already assigned to this workplace, to change Count click Edit in the list");
+            }
         }
         public void UpdateEqForWorkplace(EqForWorkViewModel model)
         {

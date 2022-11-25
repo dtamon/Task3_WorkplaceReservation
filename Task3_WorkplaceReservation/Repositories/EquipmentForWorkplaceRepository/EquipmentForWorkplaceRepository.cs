@@ -43,5 +43,11 @@ namespace Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepositor
         {
             return context.EqupmentForWorkplace.Include(e => e.Equipment).Include(w => w.Workplace).FirstOrDefault(x => x.Id == id);
         }
+
+        public bool IsEqAlreadyAssigned(int workplaceId, int equipmentId)
+        {
+            return context.EqupmentForWorkplace
+                .Where(x => x.WorkplaceId == workplaceId && x.EquipmentId == equipmentId).Any();
+        }
     }
 }
