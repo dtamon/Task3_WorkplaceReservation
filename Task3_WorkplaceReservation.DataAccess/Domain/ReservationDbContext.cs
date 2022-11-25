@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Task3_WorkplaceReservation.Models;
+﻿
+using Microsoft.EntityFrameworkCore;
 
-namespace Task3_WorkplaceReservation.Domain
+namespace Task3_WorkplaceReservation.DataAccess.Domain
 {
     public class ReservationDbContext : DbContext
     {

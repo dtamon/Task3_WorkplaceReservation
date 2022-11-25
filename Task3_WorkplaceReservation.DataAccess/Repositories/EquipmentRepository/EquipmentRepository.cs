@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Task3_WorkplaceReservation.Domain;
+using Task3_WorkplaceReservation.DataAccess.Domain;
 
-namespace Task3_WorkplaceReservation.Repositories.EquipmentRepository
+namespace Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentRepository
 {
     public class EquipmentRepository : IEquipmentRepository
     {

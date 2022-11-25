@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3_WorkplaceReservation", "Task3_WorkplaceReservation\Task3_WorkplaceReservation.csproj", "{A71C1EA1-7582-4BE6-A439-A72F39821759}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task3_WorkplaceReservation.DataAccess", "Task3_WorkplaceReservation.DataAccess\Task3_WorkplaceReservation.DataAccess.csproj", "{8520F379-1730-4887-A8E6-27F7DF8ACCE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A71C1EA1-7582-4BE6-A439-A72F39821759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A71C1EA1-7582-4BE6-A439-A72F39821759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A71C1EA1-7582-4BE6-A439-A72F39821759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8520F379-1730-4887-A8E6-27F7DF8ACCE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8520F379-1730-4887-A8E6-27F7DF8ACCE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8520F379-1730-4887-A8E6-27F7DF8ACCE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8520F379-1730-4887-A8E6-27F7DF8ACCE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

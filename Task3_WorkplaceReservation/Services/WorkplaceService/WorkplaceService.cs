@@ -1,7 +1,7 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
+using Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentForWorkplaceRepository;
+using Task3_WorkplaceReservation.DataAccess.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Models;
-using Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepository;
-using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Services.EquipmentService;
 
 namespace Task3_WorkplaceReservation.Services.WorkplaceService
@@ -55,19 +55,15 @@ namespace Task3_WorkplaceReservation.Services.WorkplaceService
 
         public List<WorkplaceViewModel> GetWorkplaces()
         {
-            var workplaces = new List<WorkplaceViewModel>();
-            foreach (var model in _workplaceRepository.GetWorkplaces())
+            var workplaces = _workplaceRepository.GetWorkplaces().ConvertAll(x => new WorkplaceViewModel()
             {
-                workplaces.Add(new WorkplaceViewModel()
-                {
-                    Id = model.Id,
-                    Floor = model.Floor,
-                    Room = model.Room,
-                    Table = model.Table,
-                    FullLoc = "Floor=" + model.Floor + "; Room=" + model.Room + "; Table=" + model.Table,
-                    EqForWorkplace = _equipmentForWorkplaceRepository.GetEquipmentByWorkplaceId(model.Id),
-                });
-            }
+                Id= x.Id,
+                Floor = x.Floor,
+                Room = x.Room,
+                Table = x.Table,
+                FullLoc = "Floor=" + x.Floor + "; Room=" + x.Room + "; Table=" + x.Table,
+                EqForWorkplace = _equipmentForWorkplaceRepository.GetEquipmentByWorkplaceId(x.Id)
+            });
             return workplaces;
         }
 

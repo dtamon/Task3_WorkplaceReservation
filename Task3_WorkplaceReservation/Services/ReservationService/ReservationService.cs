@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
+using Task3_WorkplaceReservation.DataAccess.Repositories.EmployeeRepository;
+using Task3_WorkplaceReservation.DataAccess.Repositories.ReservationRepository;
+using Task3_WorkplaceReservation.DataAccess.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Models;
-using Task3_WorkplaceReservation.Repositories.EmployeeRepository;
-using Task3_WorkplaceReservation.Repositories.ReservationRepository;
-using Task3_WorkplaceReservation.Repositories.WorkplaceRepository;
 using Task3_WorkplaceReservation.Services.EmployeeService;
 using Task3_WorkplaceReservation.Services.WorkplaceService;
 
@@ -68,20 +67,16 @@ namespace Task3_WorkplaceReservation.Services.ReservationService
 
         public List<ReservationViewModel> GetReservations()
         {
-            var reservations = new List<ReservationViewModel>();
-            foreach (var model in _reservationRepository.GetReservations())
+            var reservations = _reservationRepository.GetReservations().ConvertAll(x => new ReservationViewModel()
             {
-                reservations.Add(new ReservationViewModel
-                {
-                    Id= model.Id,
-                    Employee = _employeeService.GetEmployeeById(model.EmployeeId),
-                    EmployeeId = model.EmployeeId,
-                    Workplace = _workplaceService.GetWorkplaceById(model.WorkplaceId),
-                    WorkplaceId = model.WorkplaceId,
-                    TimeFrom= model.TimeFrom,
-                    TimeTo= model.TimeTo
-                });
-            }
+                Id = x.Id,
+                Employee = _employeeService.GetEmployeeById(x.EmployeeId),
+                EmployeeId = x.EmployeeId,
+                Workplace = _workplaceService.GetWorkplaceById(x.WorkplaceId),
+                WorkplaceId = x.WorkplaceId,
+                TimeFrom = x.TimeFrom,
+                TimeTo = x.TimeTo
+            });
             return reservations;
         }
 

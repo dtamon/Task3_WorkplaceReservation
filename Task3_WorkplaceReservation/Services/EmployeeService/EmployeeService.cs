@@ -1,6 +1,6 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
+using Task3_WorkplaceReservation.DataAccess.Repositories.EmployeeRepository;
 using Task3_WorkplaceReservation.Models;
-using Task3_WorkplaceReservation.Repositories.EmployeeRepository;
 
 namespace Task3_WorkplaceReservation.Services.EmployeeService
 {
@@ -43,17 +43,13 @@ namespace Task3_WorkplaceReservation.Services.EmployeeService
 
         public List<EmployeeViewModel> GetEmployees()
         {
-            var employees = new List<EmployeeViewModel>();
-            foreach (var model in _employeeRepository.GetEmployees())
+            var employees = _employeeRepository.GetEmployees().ConvertAll(x => new EmployeeViewModel()
             {
-                employees.Add(new EmployeeViewModel
-                {
-                    Id = model.Id,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    FullName = model.FirstName + " " + model.LastName
-                });
-            }
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                FullName = x.FirstName+ " " + x.LastName
+            });
             return employees;
         }
 

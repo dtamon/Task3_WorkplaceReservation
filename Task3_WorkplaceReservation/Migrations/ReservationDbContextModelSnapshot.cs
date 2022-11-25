@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Task3_WorkplaceReservation.Domain;
+using Task3_WorkplaceReservation.DataAccess.Domain;
 
 #nullable disable
 

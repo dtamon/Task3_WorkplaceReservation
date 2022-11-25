@@ -1,15 +1,11 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Design.Internal;
-using Task3_WorkplaceReservation.Domain;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Services.EquipmentService;
 using Task3_WorkplaceReservation.Services.WorkplaceService;
-using Task3_WorkplaceReservation.Validators;
 
 namespace Task3_WorkplaceReservation.Controllers
 {

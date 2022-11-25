@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Task3_WorkplaceReservation.Domain;
+using Task3_WorkplaceReservation.DataAccess.Domain;
 
-namespace Task3_WorkplaceReservation.Repositories.ReservationRepository
+namespace Task3_WorkplaceReservation.DataAccess.Repositories.ReservationRepository
 {
     public class ReservationRepository : IReservationRepository
     {
@@ -24,7 +24,7 @@ namespace Task3_WorkplaceReservation.Repositories.ReservationRepository
 
         public Reservation GetReservationById(int id)
         {
-            return context.Reservations.Include(e => e.Employee).Include(w =>  w.Workplace).FirstOrDefault(x => x.Id == id);
+            return context.Reservations.Include(e => e.Employee).Include(w => w.Workplace).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Reservation> GetReservations()
@@ -43,10 +43,10 @@ namespace Task3_WorkplaceReservation.Repositories.ReservationRepository
             return !context.Reservations
                 .Where(x => x.Id != reservationId
                 && x.WorkplaceId == workplaceId
-                && ((timeFrom < x.TimeFrom && x.TimeFrom < timeTo && timeTo < x.TimeTo)
-                || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeTo < timeTo)
-                || (x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeFrom < timeTo && timeTo < x.TimeTo)
-                || (timeFrom < x.TimeFrom && x.TimeTo < timeTo)))
+                && (timeFrom < x.TimeFrom && x.TimeFrom < timeTo && timeTo < x.TimeTo
+                || x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeTo < timeTo
+                || x.TimeFrom < timeFrom && timeFrom < x.TimeTo && x.TimeFrom < timeTo && timeTo < x.TimeTo
+                || timeFrom < x.TimeFrom && x.TimeTo < timeTo))
                 .Any();
         }
     }

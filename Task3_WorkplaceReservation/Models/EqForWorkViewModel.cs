@@ -1,6 +1,4 @@
-﻿using Task3_WorkplaceReservation.Domain;
-
-namespace Task3_WorkplaceReservation.Models
+﻿namespace Task3_WorkplaceReservation.Models
 {
     public class EqForWorkViewModel
     {

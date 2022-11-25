@@ -1,6 +1,6 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
 
-namespace Task3_WorkplaceReservation.Repositories.EquipmentForWorkplaceRepository
+namespace Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentForWorkplaceRepository
 {
     public interface IEquipmentForWorkplaceRepository
     {

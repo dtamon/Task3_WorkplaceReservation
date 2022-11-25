@@ -1,4 +1,4 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
 
 namespace Task3_WorkplaceReservation.Models
 {
@@ -10,6 +10,6 @@ namespace Task3_WorkplaceReservation.Models
         public int Table { get; set; }
         public string FullLoc { get; set; }
 
-        public List<EquipmentForWorkplace>? EqForWorkplace { get; set; }
+        public List<EquipmentForWorkplace> EqForWorkplace { get; set; }
     }
 }

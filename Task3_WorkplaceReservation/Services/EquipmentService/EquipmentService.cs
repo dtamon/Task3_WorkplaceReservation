@@ -1,6 +1,6 @@
-﻿using Task3_WorkplaceReservation.Domain;
+﻿using Task3_WorkplaceReservation.DataAccess.Domain;
+using Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentRepository;
 using Task3_WorkplaceReservation.Models;
-using Task3_WorkplaceReservation.Repositories.EquipmentRepository;
 
 namespace Task3_WorkplaceReservation.Services.EquipmentService
 {
@@ -29,15 +29,11 @@ namespace Task3_WorkplaceReservation.Services.EquipmentService
 
         public List<EquipmentViewModel> GetEquipment()
         {
-            var equipment = new List<EquipmentViewModel>();
-            foreach(var model in _equipmentRepository.GetEquipment())
+            var equipment = _equipmentRepository.GetEquipment().ConvertAll(x => new EquipmentViewModel()
             {
-                equipment.Add(new EquipmentViewModel
-                {
-                    Id = model.Id,
-                    Type = model.Type
-                });
-            }
+                Id = x.Id,
+                Type = x.Type,
+            });
             return equipment;
         }
 

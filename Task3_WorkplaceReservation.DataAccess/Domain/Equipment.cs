@@ -1,4 +1,4 @@
-﻿namespace Task3_WorkplaceReservation.Domain
+﻿namespace Task3_WorkplaceReservation.DataAccess.Domain
 {
     public class Equipment
     {

@@ -1,4 +1,4 @@
-﻿namespace Task3_WorkplaceReservation.Domain
+﻿namespace Task3_WorkplaceReservation.DataAccess.Domain
 {
     public class EquipmentForWorkplace
     {
@@ -7,7 +7,7 @@
         public int WorkplaceId { get; set; }
         public Equipment Equipment { get; set; }
         public int EquipmentId { get; set; }
-        public int Count { get; set; } 
+        public int Count { get; set; }
 
     }
 }

@@ -2,7 +2,6 @@
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using Task3_WorkplaceReservation.Models;
 using Task3_WorkplaceReservation.Services.EmployeeService;
 
