@@ -11,14 +11,14 @@
         <form asp-action="AddEquipment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="WorkplaceId" class="control-label"></label>
+                <label asp-for="WorkplaceId" class="control-label">Workplace Localization</label>
                 <select asp-for="WorkplaceId" class="form-control" asp-items="ViewBag.WorkplaceList">
                     <option value="" hidden>--Select Workplace--</option>
                 </select>   
                 <span asp-validation-for="WorkplaceId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EquipmentId" class="control-label"></label>
+                <label asp-for="EquipmentId" class="control-label">Equipment Type</label>
                 <select asp-for="EquipmentId" class="form-control" asp-items="ViewBag.EquipmentList">
                     <option value="" hidden>--Select Equipment--</option>
                 </select>
