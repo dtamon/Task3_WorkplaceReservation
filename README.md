@@ -12,16 +12,16 @@ Implementation of app allowing employees of the company to reserve a working pla
 #### 5. Correct data if it did not pass validation
 #### 6. App has implemented CRUD operations for each table in database
 ##
-![Reservation List](https://imgur.com/a/roKLlAs)
+![Reservation List](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Screenoshots/ReservationList.png?raw=true)
 #### Each data List View contains table showing most important data from the relevant db table, to add new record you need to click on 'Create New' component above table
 #### In table column called 'Actions' you can decide what operation you want to perform on a database specific record, in each List View you can move to edit form, delete record. Reservation List has additional option to show all details about reservation including equipment that is assigned to reserved workplace.
 ##
-![Workplace list](https://imgur.com/a/zf08C9l)
+![Workplace list](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Screenoshots/WorkplaceList.png?raw=true)
 #### Workplace List as only one has additional actions within its view. You can call actions corresponding to the assignment of Equipment to specific workplace. In addition to 'Create New' above the table (that relates to adding new workplace to the database), you can see 'Add Equipment' which will redirect to form where you can choose what type of equipment you want to assign to which workplace and in what count. In 'Equipment on workplace' Column you have equipment that is already assigned to workplace and actions to manage it.
 ##
-![Reservation form](https://imgur.com/QPxMgLZ)
+![Reservation form](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Screenoshots/ReservationForm.png?raw=true)
 #### All forms contain components used to enter the necessary data required to succesfully save a record in database.
-![Reservation form validation](https://imgur.com/xo9ybmz)
+![Reservation form validation](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Screenoshots/ReservationFormValidation.png?raw=true)
 #### If the form didn't pass validation, you will see messages telling which fields caused the problems 
 ## Configuration
 #### 1. Change your database connection string in [appsettings.json](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Task3_WorkplaceReservation/appsettings.json)
@@ -47,5 +47,5 @@ Run `update-database` command
 
 ## Database (MS SQL Server)
 ### Database schema
-![Database Schema](https://imgur.com/a/vQMuPHC)
+![Database Schema](https://github.com/dtamon/Task3_WorkplaceReservation/blob/master/Screenoshots/DBSchema.png?raw=true)
 
