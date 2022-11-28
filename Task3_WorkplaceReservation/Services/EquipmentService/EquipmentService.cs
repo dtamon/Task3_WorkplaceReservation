@@ -14,11 +14,19 @@ namespace Task3_WorkplaceReservation.Services.EquipmentService
         }
         public void CreateEquipment(EquipmentViewModel model)
         {
-            var eq = new Equipment()
+            if (!_equipmentRepository.IsEquipmentInDb(model.Id, model.Type))
             {
-                Type = model.Type
-            };
-            _equipmentRepository.CreateEquipment(eq);
+                var eq = new Equipment()
+                {
+                    Type = model.Type
+                };
+                _equipmentRepository.CreateEquipment(eq);
+            }
+            else
+            {
+                throw new Exception("Equipment with that type already exists in database");
+            }
+                
         }
 
         public void DeleteEquipment(int id)
@@ -50,12 +58,19 @@ namespace Task3_WorkplaceReservation.Services.EquipmentService
 
         public void UpdateEquipment(EquipmentViewModel model)
         {
-            var eq = new Equipment()
+            if (!_equipmentRepository.IsEquipmentInDb(model.Id, model.Type))
             {
-                Id = model.Id,
-                Type = model.Type
-            };
-            _equipmentRepository.UpdateEquipment(eq);
+                var eq = new Equipment()
+                {
+                    Id = model.Id,
+                    Type = model.Type
+                };
+                _equipmentRepository.UpdateEquipment(eq);
+            }
+            else
+            {
+                throw new Exception("Equipment with that type already exists in database");
+            }            
         }
     }
 }

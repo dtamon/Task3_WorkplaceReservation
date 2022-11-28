@@ -37,8 +37,17 @@ namespace Task3_WorkplaceReservation.Controllers
                 result.AddToModelState(this.ModelState);
                 return View("Create", model);
             }
-            _equipmentService.CreateEquipment(model);
-            return RedirectToAction("Index");
+            try
+            {
+                _equipmentService.CreateEquipment(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e) 
+            {
+                result.AddToModelState(this.ModelState);
+                model.ErrorMessage = e.Message;
+                return View("Create", model);
+            }
         }
 
         [HttpGet]
@@ -56,8 +65,17 @@ namespace Task3_WorkplaceReservation.Controllers
                 result.AddToModelState(this.ModelState);
                 return View("Edit", model);
             }
-            _equipmentService.UpdateEquipment(model);
-            return RedirectToAction("Index");
+            try
+            {
+                _equipmentService.UpdateEquipment(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                result.AddToModelState(this.ModelState);
+                model.ErrorMessage = e.Message;
+                return View("Edit", model);
+            }
         }
 
         [HttpGet]

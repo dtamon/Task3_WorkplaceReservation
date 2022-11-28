@@ -37,5 +37,13 @@ namespace Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentRepository
             context.Equipment.Update(equipment);
             context.SaveChanges();
         }
+
+        public bool IsEquipmentInDb(int id, string type)
+        {
+            return context.Equipment
+                .Where(x => 
+                x.Id != id
+                && x.Type == type).Any();
+        }
     }
 }

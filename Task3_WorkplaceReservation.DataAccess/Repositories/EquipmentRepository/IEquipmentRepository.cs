@@ -9,5 +9,6 @@ namespace Task3_WorkplaceReservation.DataAccess.Repositories.EquipmentRepository
         public Equipment GetEquipmentById(int id);
         public void UpdateEquipment(Equipment equipment);
         public void DeleteEquipment(Equipment equipment);
+        public bool IsEquipmentInDb(int id, string type);
     }
 }
