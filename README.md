@@ -31,9 +31,9 @@ Implementation of app allowing employees of the company to reserve a working pla
   },
   ````
 #### 2. Initiate database
-In your Package Manager Console
+In your Package Manager Console run `update-database` command
 ![Package Manager Console](https://i.imgur.com/WM08rJ9.png)
-Run `update-database` command
+
 
 
 ## Architecture
